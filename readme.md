@@ -1,3 +1,13 @@
+# API Installation
+
+```git
+git clone https://github.com/mazufik/notes-restful-api.git
+
+cd notes-restful-api
+
+npm run start
+```
+
 # API Spec
 
 ## Create Notes
