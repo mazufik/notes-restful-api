@@ -1,5 +1,6 @@
 import {
   addNoteHandler,
+  deleteNoteByIdHandler,
   getAllNoteHandler,
   getNoteByIdHandler,
   updateNoteByIdHandler,
@@ -25,6 +26,11 @@ const routes = [
     method: "PUT",
     path: "/api/notes/{id}",
     handler: updateNoteByIdHandler,
+  },
+  {
+    method: "DELETE",
+    path: "/api/notes/{id}",
+    handler: deleteNoteByIdHandler,
   },
 ];
 

@@ -101,8 +101,30 @@ const updateNoteByIdHandler = ({ payload, params }, h) => {
   }).code(404);
 };
 
+const deleteNoteByIdHandler = ({ params }, h) => {
+  const { id } = params;
+
+  const index = notes.findIndex((note) => note.id === id);
+
+  if (index !== -1) {
+    notes.splice(index, 1);
+    return h.response({
+      code: 200,
+      status: "success",
+      message: "Note success deleted",
+    }).code(200);
+  }
+
+  return h.response({
+    code: 404,
+    status: "fail",
+    message: "Note fail deleted, id not found",
+  }).code(404);
+};
+
 export {
   addNoteHandler,
+  deleteNoteByIdHandler,
   getAllNoteHandler,
   getNoteByIdHandler,
   updateNoteByIdHandler,
