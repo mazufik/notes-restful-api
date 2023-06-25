@@ -68,4 +68,42 @@ const getNoteByIdHandler = ({ params }, h) => {
   }).code(404);
 };
 
-export { addNoteHandler, getAllNoteHandler, getNoteByIdHandler };
+const updateNoteByIdHandler = ({ payload, params }, h) => {
+  const { id } = params;
+  const { title, tags, body } = payload;
+  const updatedAt = new Date().toISOString();
+
+  const index = notes.findIndex((note) => note.id === id);
+
+  if (index !== -1) {
+    notes[index] = {
+      ...notes[index],
+      title,
+      tags,
+      body,
+      updatedAt,
+    };
+
+    return h.response({
+      code: 200,
+      status: "success",
+      message: "Note success updated",
+      data: {
+        notes,
+      },
+    }).code(200);
+  }
+
+  return h.response({
+    code: 404,
+    status: "fail",
+    message: "Note fail updated, Id not found",
+  }).code(404);
+};
+
+export {
+  addNoteHandler,
+  getAllNoteHandler,
+  getNoteByIdHandler,
+  updateNoteByIdHandler,
+};
