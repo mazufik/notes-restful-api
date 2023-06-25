@@ -47,4 +47,25 @@ const getAllNoteHandler = () => ({
   },
 });
 
-export { addNoteHandler, getAllNoteHandler };
+const getNoteByIdHandler = ({ params }, h) => {
+  const { id } = params;
+  const note = notes.filter((note) => note.id === id)[0];
+  if (note !== undefined) {
+    return {
+      code: 200,
+      status: "OK",
+      message: "Note is found",
+      data: {
+        note,
+      },
+    };
+  }
+
+  return h.response({
+    code: 404,
+    status: "fail",
+    message: "Note not found",
+  }).code(404);
+};
+
+export { addNoteHandler, getAllNoteHandler, getNoteByIdHandler };
