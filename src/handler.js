@@ -38,4 +38,13 @@ const addNoteHandler = ({ payload }, h) => {
   }).code(500);
 };
 
-export default addNoteHandler;
+const getAllNoteHandler = () => ({
+  code: 200,
+  status: "OK",
+  message: "List notes",
+  data: {
+    notes,
+  },
+});
+
+export { addNoteHandler, getAllNoteHandler };
