@@ -1,9 +1,8 @@
 import { nanoid } from "nanoid";
 import notes from "./notes.js";
 
-const addNoteHandler = (request, h) => {
-  const { title, tags, body } = request.payload;
-
+const addNoteHandler = ({ payload }, h) => {
+  const { title, tags, body } = payload;
   const id = nanoid(16);
   const createdAt = new Date().toISOString();
   const updatedAt = createdAt;
@@ -22,25 +21,21 @@ const addNoteHandler = (request, h) => {
   const isSuccess = notes.filter((note) => note.id === id).length > 0;
 
   if (isSuccess) {
-    const response = h.response({
+    return h.response({
       code: 201,
       status: "success",
       message: "Note success to add",
       data: {
         notes,
       },
-    });
-    response.code(201);
-    return response;
+    }).code(201);
   }
 
-  const response = h.response({
+  return h.response({
     code: 500,
     status: "fail",
     message: "Note failed to add",
-  });
-  response.code(500);
-  return response;
+  }).code(500);
 };
 
 export default addNoteHandler;
